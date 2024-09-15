@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar Reporte</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .header {
+            background-color: #4CAF50; /* Verde ICBF */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .card {
+            margin-bottom: 30px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #4CAF50; /* Verde ICBF */
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Subir Archivo y Generar Reporte</h1>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <form action="/" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="file">Archivo CSV:</label>
+                        <input type="file" name="file" id="file" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_referencia">Fecha de referencia:</label>
+                        <input type="text" name="fecha_referencia" id="fecha_referencia" placeholder="dd/mm/yyyy" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Procesar</button>
+                </form>
+            </div>
+        </div>
+
+        {% if img_base64 %}
+        <div class="card">
+            <div class="card-body">
+                <h2>Gráfico de Beneficiarios</h2>
+                <img src="data:image/png;base64,{{ img_base64 }}" alt="Gráfico de Beneficiarios" class="img-fluid">
+                <a href="{{ url_for('descargar_excel') }}" class="btn btn-success mt-3">Descargar Reporte Excel</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="footer">
+        <p>Analisis de Reportes CUENTAME. Todos los derechos reservados Imaginandolo 2024</p>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
